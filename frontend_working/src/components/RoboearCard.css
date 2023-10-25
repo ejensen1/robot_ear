@@ -1,0 +1,56 @@
+.music-icon1,
+.music-icon2,
+.title-child {
+  position: absolute;
+  top: 168px;
+  left: 416px;
+  width: 54px;
+  height: 59px;
+  object-fit: cover;
+}
+.music-icon2,
+.title-child {
+  top: 10px;
+  left: 188px;
+  width: 78px;
+  height: 77px;
+}
+.title-child {
+  top: 0;
+  left: 0;
+  border-radius: 50%;
+  width: 214px;
+  height: 235px;
+}
+.by-robobabies,
+.roboear {
+  position: absolute;
+  display: inline-block;
+}
+.roboear {
+  top: 100px;
+  left: 168px;
+  width: 511px;
+  text-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
+  -webkit-text-stroke: 1px #122027;
+}
+.by-robobabies {
+  top: 189px;
+  left: 191px;
+  font-size: var(--font-size-xl);
+  font-family: var(--font-orbitron);
+  color: var(--color-white);
+  width: 262px;
+  height: 46px;
+}
+.title {
+  position: absolute;
+  top: 105px;
+  left: 62px;
+  width: 679px;
+  height: 235px;
+  text-align: left;
+  font-size: var(--font-size-45xl);
+  color: var(--color-lightslategray);
+  font-family: var(--font-rubik-glitch);
+}
