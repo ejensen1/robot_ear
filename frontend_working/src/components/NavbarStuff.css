@@ -90,3 +90,7 @@
   color: var(--color-white);
   font-family: var(--font-orbitron);
 }
+
+input[type="file"] {
+  display: none;
+}
