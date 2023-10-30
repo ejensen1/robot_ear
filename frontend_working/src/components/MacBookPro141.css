@@ -1,0 +1,47 @@
+.about-us,
+.sign-uplogin {
+  position: absolute;
+  margin-top: 20px;
+  margin-right: 40px;
+  top: 0;
+  left: 0;
+  display: inline-block;
+  width: 231px;
+  height: 31px;
+  background-color: transparent;
+  font-family: var(--font-orbitron);
+  color: var(--color-white);
+  font-size: 15px;
+  font-weight: bold;
+}
+.about-us {
+  position: relative;
+  left: -212px;
+  width: 212px;
+  height: 28px;
+}
+.signuplogin {
+  position: absolute;
+  /*top: 32px;
+  left: 1249px;
+  width: 231px;
+  height: 31px;*/
+  top: 0px;
+  right: 0px;
+}
+.macbook-pro-14-1 {
+  position: center;
+  /*width: 100%;*/
+  height: 830px;
+  /*height: 928px;*/
+  overflow: hidden;
+  background-image: url(/public/macbook-pro-14--1@3x.png);
+  min-height: 100%;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center center;
+  text-align: left;
+  font-size: var(--font-size-11xl);
+  color: var(--color-white);
+  font-family: var(--font-orbitron);
+}
