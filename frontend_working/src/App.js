@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useState,useEffect } from "react";
 import {
   Routes,
   Route,
@@ -11,12 +11,24 @@ function App() {
   const action = useNavigationType();
   const location = useLocation();
   const pathname = location.pathname;
+  const [data,setData] = useState([{}])
 
   useEffect(() => {
     if (action !== "POP") {
       window.scrollTo(0, 0);
     }
   }, [action, pathname]);
+
+  useEffect(() => {
+    fetch("/members").then(
+      res => res.json()
+    ).then(
+      data => {
+        setData(data)
+        console.log(data)
+      }
+    )
+  },[])
 
   useEffect(() => {
     let title = "";
