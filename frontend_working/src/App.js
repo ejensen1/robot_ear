@@ -11,7 +11,7 @@ function App() {
   const action = useNavigationType();
   const location = useLocation();
   const pathname = location.pathname;
-  const [data,setData] = useState([{}])
+  //const [data,setData] = useState([{}])
 
   useEffect(() => {
     if (action !== "POP") {
@@ -19,16 +19,16 @@ function App() {
     }
   }, [action, pathname]);
 
-  useEffect(() => {
-    fetch("/members").then(
-      res => res.json()
-    ).then(
-      data => {
-        setData(data)
-        console.log(data)
-      }
-    )
-  },[])
+  // useEffect(() => {
+  //   fetch("/members").then(
+  //     res => res.json()
+  //   ).then(
+  //     data => {
+  //       setData(data)
+  //       console.log(data)
+  //     }
+  //   )
+  // },[])
 
   useEffect(() => {
     let title = "";
