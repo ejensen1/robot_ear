@@ -1,3 +1,5 @@
+# upload endpoint function from : https://tutorial101.blogspot.com/2023/04/react-js-and-python-flask-multiple.html
+
 from flask import Flask, request, session, json, jsonify
 import os
 from flask_cors import CORS
@@ -6,18 +8,22 @@ from werkzeug.utils import secure_filename
 UPLOAD_FOLDER = 'file_upload'
 
 app = Flask(__name__)
+# Authorization for the Post Request
 CORS(app, supports_credentials=True)
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 
+# when the server is started http://localhost:8080 should say hello world
 @app.route("/")
 def hello_world():
     print("hello world\n")
     return "<p>Hello, World!</p>"
 
+# test endpoint
 @app.route("/members")
 def members():
     return {"members": ["rishita","tanya","melany"]}
 
+# uploading .wav file that goes into file_upload folder for backend to use
 @app.route("/upload", methods=["POST"])
 def upload_file():
     # check if the post request has the file part
@@ -35,7 +41,9 @@ def upload_file():
     success = False
            
     if file:
+        # grab file name
         filename = secure_filename(file.filename)
+        # save the file to the file_upload folder
         file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
         success = True
     else:
@@ -44,7 +52,8 @@ def upload_file():
             "status": 'failed'
         })
         return resp
-         
+
+    # responses to send back     
     if success and errors:
         errors['message'] = 'File(s) successfully uploaded'
         errors['status'] = 'failed'
@@ -63,21 +72,5 @@ def upload_file():
         resp.status_code = 500
         return resp
 
-    # filename = secure_filename(file.filename) 
-    # file.save(os.path.join(app.config['UPLOAD_FOLDER']), filename)
-    # return '''
-    # <!doctype html>
-    # <title>Upload new File</title>
-    # <h1>Upload new File</h1>
-    # <form method=post enctype=multipart/form-data>
-    #   <input type=file name=file>
-    #   <input type=submit value=Upload>
-    # </form>
-    # '''
-    #filename = secure_filename(file.filename)
-
 if __name__ == "__main__": 
-    #app.secret_key = os.urandom(24)
     app.run(port=8080, debug=True)
-
-#flask_cors.CORS(app, expose_headers='Authorization')
