@@ -1,14 +1,14 @@
 .navbar-shape {
   position: absolute;
   margin-right: 30px;
-  /*top: 0; */
- /*left: 0; */
+  top: 0;
+left: 0; 
  right: 0;
  bottom: 0;
  float: right;
   border-radius: var(--br-26xl);
   background-color: var(--color-gray);
-  box-shadow: 0 0 4456.62px #9299be, 0 0 2546.64px #9299be,
+ box-shadow: 0 0 4456.62px #9299be, 0 0 2546.64px #9299be,
     0 0 1485.54px #9299be, 0 0 742.77px #9299be, 0 0 212.22px #9299be,
     0 0 106.11px #9299be;
   width: 778px;

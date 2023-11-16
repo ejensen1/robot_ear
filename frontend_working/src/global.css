@@ -29,3 +29,6 @@ body {
   /* Border radiuses */
   --br-26xl: 45px;
 }
+#output{
+  justify-content: center;
+}
