@@ -5,6 +5,7 @@ import { useState } from "react";
 
 // file state code from: https://www.geeksforgeeks.org/file-uploading-in-react-js/
 // fixing input file tag from: https://jsfiddle.net/4cwpLvae/
+// html2pdf library: https://github.com/parallax/jsPDF
 
 class NavbarStuff extends React.Component {
   state = {
@@ -12,12 +13,10 @@ class NavbarStuff extends React.Component {
   };
 
   sheetClick = event => {
-    console.log("in sheetclick")
     this.setState({showNotes: true})
   }
 
   displayNotes = () => {
-    console.log("inside display notes")
     if (this.state.showNotes) {
       const { Factory, EasyScore, System } = Vex.Flow;
       const vf = new Factory({renderer: { elementId: 'output', width: 500, height: 200 },});
@@ -33,6 +32,19 @@ class NavbarStuff extends React.Component {
       .addClef('treble')
       .addTimeSignature('4/4');
       vf.draw();
+      const element = document.getElementById("output");
+
+    // Create a configuration object
+    const opt = {
+        margin:       10,
+        filename:     'musicSheet.pdf',
+        image:        { type: 'pdf', quality: 0.98 },
+        html2canvas:  { scale: 2 },
+        jsPDF:        { unit: 'mm', format: 'a4', orientation: 'portrait' }
+    };
+
+    // Use html2pdf library to generate PDF
+    html2pdf(element, opt);
     }
   }
 // On file select (from the pop up)
@@ -66,9 +78,11 @@ onFileChange = event => {
       <input type="file" id="file-upload" accept=".wav" onChange={this.onFileChange}/>
       </form>
     </nav>
-     <div id="output" src="https://unpkg.com/vexflow/releases/vexflow-debug.js" async></div>
-     {this.displayNotes()}
-     </div>
+    <div class="flex-containter">
+    <div id="output" src="https://unpkg.com/vexflow/releases/vexflow-debug.js" async></div>
+    {this.displayNotes()}
+    </div>
+    </div>
   );
 }
 

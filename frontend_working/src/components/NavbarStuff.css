@@ -1,3 +1,6 @@
+#output{
+  float: center;
+}
 .navbar-shape {
   position: absolute;
   margin-right: 30px;
