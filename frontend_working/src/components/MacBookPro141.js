@@ -49,9 +49,6 @@ const MacBookPro141 = () => {
         <Popup trigger = {buttonPopup2} setTrigger={setButtonPopup2}>
           <h1>Create an Account</h1>
 
-            <label for="Name:">Enter your name:</label>
-            <input type="text" id="name" required></input>
-            <br></br>
             <label for="Email:">Enter your email:</label>
             <input type="text" id="email" required></input>
             <br></br>
