@@ -14,7 +14,14 @@ const MacBookPro141 = () => {
   // const [password, setPassword] = useState<string>("");
 
   const logInUser = async () => {
-    console.log(email, password)
+    const emailInput = document.getElementById("Email:"); 
+    const passwordInput = document.getElementById("Password"); 
+
+    const email = emailInput.value;
+    const password = passwordInput.value;
+
+    console.log("Email:", email);
+    console.log("Password:", password);
   };
 
   return (
