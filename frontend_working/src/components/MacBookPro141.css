@@ -32,7 +32,7 @@
 .macbook-pro-14-1 {
   position: center;
   /*width: 100%;*/
-  height: 830px;
+  height: 100vh;
   /*height: 928px;*/
   overflow: hidden;
   background-image: url(/public/macbook-pro-14--1@3x.png);
@@ -44,4 +44,5 @@
   font-size: var(--font-size-11xl);
   color: var(--color-white);
   font-family: var(--font-orbitron);
+  
 }
