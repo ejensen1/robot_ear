@@ -24,6 +24,8 @@ def process_audio_file(wavfile_name):
     start_time = 0
     segment_count = 1
 
+    return_str = ""
+
     while start_time < total_duration:
     
         end_time = start_time + segment_duration_set
@@ -72,17 +74,20 @@ def process_audio_file(wavfile_name):
             break;
         segment_audio.close()
 
-        print(f'Segment {segment_count}: {note}')
+    
         
-        #os.remove(segment_audio)
+        # string output
+        return_str += f"{note}, "
 
         # Update pointers for the next segment
         start_time = end_time
         end_time = min(end_time + segment_duration, total_duration)
         segment_count += 1
+    return return_str
 
 def main():
-    process_audio_file("d2.wav")
+    notes = process_audio_file("a#0_98.wav")
+    print(notes)
     return 0
 
 if __name__ == "__main__":
