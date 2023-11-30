@@ -7,18 +7,32 @@ import librosa
 
 #install these libraries ----
 def note_detect(audio_file):
+	file_length = audio_file.getnframes()
+	
+	f_s = audio_file.getframerate()
+	
+	counter = audio_file.getnchannels()
 
-	#-------------------------------------------
-	#here we are just storing our sound file as a numpy array
-	#you can also use any other method to store the file as an np array
-	file_length=audio_file.getnframes()
-	f_s=audio_file.getframerate() #sampling frequency
-	sound = np.zeros(file_length) #blank array
+	frames = audio_file.readframes(file_length)  # Read all frames at once
+	sound = np.array(struct.unpack(f"{file_length * counter}h", frames))
 
+	sound = np.divide(sound, float(2 ** 15))  # Scaling it to the range -1 to 1
 
+	data_count = 0
 
 	for i in range(file_length) :
 		wdata=audio_file.readframes(1)
+		#print(len(wdata))
+		if len(wdata) == 0:
+			break;
+		if wdata:
+			data_count += len(wdata)  # Increment the counter by the length of the read data
+			data = struct.unpack("<h", wdata)
+			sound[i] = int(data[0])
+	
+		# After the loop, print the total amount of data read
+		print(f"Total data read: {data_count} bytes")
+	
 		data=struct.unpack("<h",wdata)
 		sound[i] = int(data[0])
 
