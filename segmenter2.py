@@ -27,6 +27,8 @@ def process_audio_file(wavfile_name):
     return_str = ""
     last_note = None
 
+    first_note_encountered = False
+
     while start_time < total_duration:
     
         end_time = start_time + segment_duration_set
@@ -41,7 +43,6 @@ def process_audio_file(wavfile_name):
             print("No data in segment")
             break
 
-        
         #print(f"Segment {segment_count} length:", len(segment))  # Debug: Print segment length
     
         file_name = f'segment_{segment_count}.wav'
@@ -77,7 +78,13 @@ def process_audio_file(wavfile_name):
 
         if last_note is not None:
             return_str += ', ' if return_str else ''
-            return_str += last_note
+            
+            if not first_note_encountered:
+                return_str += last_note + "/q"
+                first_note_encountered = True
+            else:
+                return_str += last_note
+
         last_note = note
 
         #print(f'Segment {segment_count}: {note}')
