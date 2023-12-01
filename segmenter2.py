@@ -53,12 +53,18 @@ def process_audio_file(wavfile_name):
             #notes.extend([''] * (4 - len(notes)))
 
             formatted_notes.append('(' + ', '.join([note + "/q" if idx == 0 else note for idx, note in enumerate(notes)]) + ')')
-
+            
     return formatted_notes
 
 def main():
-    notes = process_audio_file("a#0_98.wav")
-    print(notes)
+    notes = process_audio_file("open_guitar_strings.wav")
+    formatted_notes = [note.replace("'", "") for note in notes]  # Remove quotation marks from each string
+    print(formatted_notes)
+    
+
+    #for note1 in formatted_notes:
+    #    print(note1)
+    
     return 0
 
 if __name__ == "__main__":
