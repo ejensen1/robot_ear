@@ -9,7 +9,9 @@ import { useState } from "react";
 
 class NavbarStuff extends React.Component {
   state = {
-    showNotes: false
+    showNotes: false,
+    selectedFile: null,
+    notes_string: null
   };
 
   sheetClick = event => {
@@ -18,6 +20,12 @@ class NavbarStuff extends React.Component {
 
   displayNotes = () => {
     if (this.state.showNotes) {
+      console.log(this.state.selectedFile.name)
+      axios
+       .get(`http://localhost:8080/download?name=${this.state.selectedFile.name}`)
+       .then(function (response) {
+         console.log(response.data)
+       });
       const { Factory, EasyScore, System } = Vex.Flow;
       const vf = new Factory({renderer: { elementId: 'output', width: 500, height: 200 },});
       const score = vf.EasyScore();
@@ -26,7 +34,6 @@ class NavbarStuff extends React.Component {
       .addStave({
         voices: [
           score.voice(score.notes('C#5/q, B4, A4, G#4', { stem: 'up' })),
-          score.voice(score.notes('C#4/h, C#4', { stem: 'down' })),
         ],
       })
       .addClef('treble')
@@ -50,7 +57,7 @@ class NavbarStuff extends React.Component {
 // On file select (from the pop up)
 onFileChange = event => {
     // Update the state
-    //this.setState({ selectedFile: event.target.files[0] });
+    this.setState({ selectedFile: event.target.files[0] });
     // create a formData to format the file for sending to the server
     const fileData = new FormData();
     // populate the formData object

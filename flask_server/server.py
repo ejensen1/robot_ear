@@ -8,8 +8,9 @@ from flask_bcrypt import Bcrypt
 from flask_session import Session
 from config import ApplicationConfig
 from flask_sqlalchemy import SQLAlchemy
+from segmenter2 import process_audio_file
 
-UPLOAD_FOLDER = 'file_upload'
+UPLOAD_FOLDER = 'flask_server'
 
 # db = SQLAlchemy()
 
@@ -60,7 +61,7 @@ def upload_file():
         # grab file name
         filename = secure_filename(file.filename)
         # save the file to the file_upload folder
-        file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
+        file.save(os.path.join(filename))
         success = True
     else:
         resp = jsonify({
@@ -86,6 +87,16 @@ def upload_file():
     else:
         resp = jsonify(errors)
         resp.status_code = 500
+        return resp
+
+@app.route("/download", methods=["GET"])
+def get_notes():
+    file_name = request.args.get('name')
+    print(file_name)
+    if file_name:
+        notes = process_audio_file(file_name)
+        if notes:
+            resp = jsonify(notes)
         return resp
 
 @app.route("/register", methods=["POST"])
