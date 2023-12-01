@@ -1,102 +1,60 @@
 
 import wave
 import librosa
-import librosa.display
-import matplotlib.pyplot as plt
 import soundfile as sf
 import numpy as np
-from frequency_classifier import note_detect
+from frequency_classifier import note_detect  # Assuming note_detect function is implemented elsewhere
 import os
 
 def process_audio_file(wavfile_name):
-    # Load the audio file
     audio, sr = librosa.load(wavfile_name, sr=None, mono=True)
-
-    # !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-    # The output changes significanty when we change this number
-    segment_duration = .5  # 0.5 seconds
-    segment_duration_set = int(segment_duration * sr)
-
-    # Calculate the total length of the audio in seconds
+    segment_duration = 0.5  # 0.5 seconds
+    segment_duration_samples = int(segment_duration * sr)
     total_duration = len(audio)
 
-    # Initialize start and end times
     start_time = 0
     segment_count = 1
-
-    return_str = ""
-    last_note = None
-
-    first_note_encountered = False
+    notes_list = []
 
     while start_time < total_duration:
-    
-        end_time = start_time + segment_duration_set
-
+        end_time = start_time + segment_duration_samples
         if end_time > total_duration:
             end_time = total_duration
 
-        # Extract the segment
         segment = audio[start_time:end_time]
 
         if len(segment) == 0:
             print("No data in segment")
             break
 
-        #print(f"Segment {segment_count} length:", len(segment))  # Debug: Print segment length
-    
         file_name = f'segment_{segment_count}.wav'
         sf.write(file_name, segment, sr)
 
-        #######################################################
-        # THIS CODE IS FOR THE MACHINE LEARNING CLASSIFIER IF WE GET IT TO WORK
-        # Calculate the Short-Time Fourier Transform (STFT)
-        #stft = np.abs(librosa.stft(segment))
-
-        # Convert the STFT to a spectrogram
-        #spectrogram = librosa.amplitude_to_db(stft, ref=np.max)
-
-        # Display the spectrogram using matplotlib
-        #plt.figure(figsize=(10, 5))
-        #librosa.display.specshow(spectrogram, sr=sr, x_axis='time', y_axis='linear')
-        #plt.colorbar(format='%+2.0f dB')
-        #plt.title(f'Spectrogram - Segment {segment_count}')
-        #plt.xlabel('Time')
-        #plt.ylabel('Frequency')
-        #plt.tight_layout()
-        #plt.show()
-        ####################################################################
-
         segment_audio = wave.open(f'segment_{segment_count}.wav', 'rb')
-
         if len(segment) > 0:
             note = note_detect(segment_audio)
         else:
-            print("no data in segment")
-            break;
+            print("No data in segment")
+            break
         segment_audio.close()
 
-        if last_note is not None:
-            return_str += ', ' if return_str else ''
-            
-            if not first_note_encountered:
-                return_str += last_note + "/q"
-                first_note_encountered = True
-            else:
-                return_str += last_note
+        if len(notes_list) == 0 or len(notes_list[-1]) == 4:
+            notes_list.append([note])
+        else:
+            notes_list[-1].append(note)
 
-        last_note = note
-
-        #print(f'Segment {segment_count}: {note}')
-
-        # Update pointers for the next segment
         start_time = end_time
-        end_time = min(end_time + segment_duration, total_duration)
+        end_time = min(end_time + segment_duration_samples, total_duration)
         segment_count += 1
 
-    if last_note:
-        return_str += ', ' + last_note
-    return return_str
+    formatted_notes = []
+    for notes in notes_list:
+        if len(notes) == 4:
+            #notes.extend([''] * (4 - len(notes)))
+
+            formatted_notes.append('(' + ', '.join([note + "/q" if idx == 0 else note for idx, note in enumerate(notes)]) + ')')
+
+    return formatted_notes
 
 def main():
     notes = process_audio_file("a#0_98.wav")
