@@ -23,9 +23,18 @@ class NavbarStuff extends React.Component {
       console.log(this.state.selectedFile.name)
       axios
        .get(`http://localhost:8080/download?name=${this.state.selectedFile.name}`)
-       .then(function (response) {
-         console.log(response.data)
-       });
+       .then((response) => {
+        this.pdfer(response.data);
+        var notes_string = response.data
+
+       })
+      }
+    }
+
+    pdfer = (notes_string) => {
+      console.log(notes_string)
+      var fix_notes = notes_string + "/w";
+      console.log(fix_notes);
       const { Factory, EasyScore, System } = Vex.Flow;
       const vf = new Factory({renderer: { elementId: 'output', width: 500, height: 200 },});
       const score = vf.EasyScore();
@@ -33,7 +42,7 @@ class NavbarStuff extends React.Component {
       system
       .addStave({
         voices: [
-          score.voice(score.notes('C#5/q, B4, A4, G#4', { stem: 'up' })),
+          score.voice(score.notes(fix_notes, { stem: 'up' })),
         ],
       })
       .addClef('treble')
@@ -52,8 +61,8 @@ class NavbarStuff extends React.Component {
 
     // Use html2pdf library to generate PDF
     html2pdf(element, opt);
-    }
-  }
+}
+
 // On file select (from the pop up)
 onFileChange = event => {
     // Update the state
