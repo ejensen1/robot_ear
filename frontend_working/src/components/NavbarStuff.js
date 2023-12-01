@@ -33,8 +33,6 @@ class NavbarStuff extends React.Component {
 
     pdfer = (notes_string) => {
       console.log(notes_string)
-      var fix_notes = notes_string + "/w";
-      console.log(fix_notes);
       const { Factory, EasyScore, System } = Vex.Flow;
       const vf = new Factory({renderer: { elementId: 'output', width: 500, height: 200 },});
       const score = vf.EasyScore();
@@ -42,11 +40,9 @@ class NavbarStuff extends React.Component {
       system
       .addStave({
         voices: [
-          score.voice(score.notes(fix_notes, { stem: 'up' })),
-        ],
-      })
-      .addClef('treble')
-      .addTimeSignature('4/4');
+      score.voice(score.notes('A#5/q, A#5, A#5, A#5',{ stem: 'down'} )),
+    ],
+  });
       vf.draw();
       const element = document.getElementById("output");
 
