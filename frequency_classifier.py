@@ -1,4 +1,4 @@
-
+# code modified from https://github.com/Amagnum/Music-notes-detection/blob/master/music_notes_detection.py
 
 import numpy as np
 import wave
