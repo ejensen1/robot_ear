@@ -9,12 +9,13 @@ const MacBookPro141 = () => {
   const [buttonPopup, setButtonPopup] = useState(false);
   const [buttonPopup2, setButtonPopup2] = useState(false);
   const [buttonPopup3, setButtonPopup3] = useState(false);
+  const [buttonPopup4, setButtonPopup4] = useState(false);
 
   // const [email, setEmail] = useState<string>("");
   // const [password, setPassword] = useState<string>("");
 
   const logInUser = async() => {
-    console.log("hello")
+    setButtonPopup(false);
     const emailInput = document.getElementById("email"); 
     const passwordInput = document.getElementById("password"); 
 
@@ -29,6 +30,7 @@ const MacBookPro141 = () => {
     userData.append("password", password1);
     axios.post("http://localhost:8080/login", { email : email1 , password : password1})
     .then((response) => {
+      setButtonPopup4(true);
       console.log(response)
     })
     //new code to check if a user doesn't exsist
@@ -46,7 +48,7 @@ const MacBookPro141 = () => {
   };
 
   const regUser = async() => {
-    console.log("hello")
+    setButtonPopup2(false);
     const emailInput = document.getElementById("new_email"); 
     const passwordInput = document.getElementById("new_password"); 
 
@@ -64,6 +66,7 @@ const MacBookPro141 = () => {
 
   return (
     <div className="macbook-pro-14-1">
+      
       <NavbarStuff />
 
       <div className="signuplogin">
@@ -83,6 +86,8 @@ const MacBookPro141 = () => {
           <button className="Sign Up" onClick={() => setButtonPopup2(true)} >Sign Up</button>
 
         </Popup>
+
+
         {/* second pop up */}
         <Popup trigger = {buttonPopup2} setTrigger={setButtonPopup2}>
           <h1>Create an Account</h1>
@@ -94,6 +99,8 @@ const MacBookPro141 = () => {
             <input type="text" id="new_password" required></input>
             <br></br>
           <button type="button" onClick={() => regUser()}>Submit</button>
+
+
         </Popup>
         
 
@@ -104,6 +111,14 @@ const MacBookPro141 = () => {
             Currently, softwares that provide the service of music transcription are guarded by paywalls 
             or not usable in app and made user-friendly. Robot Ear is here to change that.  </p>
         </Popup>
+
+        <Popup trigger = {buttonPopup4} setTrigger={setButtonPopup4}>
+            <h1>SUCCESS</h1>
+              <p>SUCCESS LOGIN</p>
+            <button type="button" onClick={() => setButtonPopup4(false)}>Ok</button>
+          </Popup>
+
+        
 
         <button className="saved-files" >Saved Files</button>
 
