@@ -62,6 +62,17 @@ const MacBookPro141 = () => {
     .then((response) => {
       console.log(response)
     })
+    .catch((error) => { // error is handled in catch block
+      if (error.response) { // status code out of the range of 2xx
+        console.log("Data :" , error.response.data);
+        console.log("Status :" + error.response.status);
+        alert("User exists")
+      } else if (error.request) { // The request was made but no response was received
+        console.log(error.request);
+      } else {// Error on setting up the request
+        console.log('Error', error.message);
+      }
+    });
   };
 
   return (
