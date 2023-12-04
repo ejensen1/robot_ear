@@ -8,8 +8,7 @@ import axios from "axios";
 const MacBookPro141 = () => {
   const [buttonPopup, setButtonPopup] = useState(false);
   const [buttonPopup2, setButtonPopup2] = useState(false);
-
-  const [TimedPopup, setTimedPopup] = useState(false);
+  const [buttonPopup3, setButtonPopup3] = useState(false);
 
   // const [email, setEmail] = useState<string>("");
   // const [password, setPassword] = useState<string>("");
@@ -32,6 +31,18 @@ const MacBookPro141 = () => {
     .then((response) => {
       console.log(response)
     })
+    //new code to check if a user doesn't exsist
+    .catch((error) => { // error is handled in catch block
+      if (error.response) { // status code out of the range of 2xx
+        console.log("Data :" , error.response.data);
+        console.log("Status :" + error.response.status);
+        alert("User doesn't exist")
+      } else if (error.request) { // The request was made but no response was received
+        console.log(error.request);
+      } else {// Error on setting up the request
+        console.log('Error', error.message);
+      }
+    });
   };
 
   const regUser = async() => {
@@ -85,7 +96,17 @@ const MacBookPro141 = () => {
           <button type="button" onClick={() => regUser()}>Submit</button>
         </Popup>
         
-        <button className="about-us" >About us</button>
+
+        <button className="about-us" onClick={() => setButtonPopup3(true)} >About us</button>
+        <Popup trigger = {buttonPopup3} setTrigger={setButtonPopup3}>
+        <h1>Why we created this app?</h1>
+          <p>Musicians want to play the music they love and to do this they need sheet music for it! 
+            Currently, softwares that provide the service of music transcription are guarded by paywalls 
+            or not usable in app and made user-friendly. Robot Ear is here to change that.  </p>
+        </Popup>
+
+        <button className="saved-files" >Saved Files</button>
+
       </div>
       <RoboearCard />
     </div>
@@ -93,3 +114,4 @@ const MacBookPro141 = () => {
 };
 
 export default MacBookPro141;
+
