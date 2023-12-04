@@ -10,6 +10,7 @@ const MacBookPro141 = () => {
   const [buttonPopup2, setButtonPopup2] = useState(false);
   const [buttonPopup3, setButtonPopup3] = useState(false);
   const [buttonPopup4, setButtonPopup4] = useState(false);
+  const [showNavBar, setNavBar] = useState(false);
 
   // const [email, setEmail] = useState<string>("");
   // const [password, setPassword] = useState<string>("");
@@ -31,6 +32,7 @@ const MacBookPro141 = () => {
     axios.post("http://localhost:8080/login", { email : email1 , password : password1})
     .then((response) => {
       setButtonPopup4(true);
+      setNavBar(true);
       console.log(response)
     })
     //new code to check if a user doesn't exsist
@@ -78,7 +80,7 @@ const MacBookPro141 = () => {
   return (
     <div className="macbook-pro-14-1">
       
-      <NavbarStuff />
+      {showNavBar && <NavbarStuff />}
 
       <div className="signuplogin">
         <button className="sign-uplogin" onClick={() => setButtonPopup(true)}>Sign up/Login</button>
