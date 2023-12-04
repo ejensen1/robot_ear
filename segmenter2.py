@@ -33,6 +33,11 @@ def process_audio_file(wavfile_name):
         segment_audio = wave.open(f'segment_{segment_count}.wav', 'rb')
         if len(segment) > 0:
             note = note_detect(segment_audio)
+
+            #if '#' in note:
+                #note = note[0] + '#' + note[1:]
+            #if note.count('#') > 1:
+            #    note = note[:note.rfind('#')]
         else:
             print("No data in segment")
             break
@@ -57,13 +62,13 @@ def process_audio_file(wavfile_name):
     return formatted_notes
 
 def main():
-    notes = process_audio_file("open_guitar_strings.wav")
+    notes = process_audio_file("dust_in_the_wind.wav")
     formatted_notes = [note.replace("'", "") for note in notes]  # Remove quotation marks from each string
     print(formatted_notes)
     
 
-    #for note1 in formatted_notes:
-    #    print(note1)
+    for note1 in formatted_notes:
+        print(note1)
     
     return 0
 
