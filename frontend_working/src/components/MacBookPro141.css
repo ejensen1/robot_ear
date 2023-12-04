@@ -1,4 +1,5 @@
 .about-us,
+.saved-files,
 .sign-uplogin {
   position: absolute;
   margin-top: 20px;
@@ -28,7 +29,16 @@
   height: 31px;*/
   top: 0px;
   right: 0px;
+  
 }
+
+.saved-files {
+  position: relative;
+  left: -21px;
+  width: 212px;
+  height: 28px;
+}
+
 .macbook-pro-14-1 {
   position: center;
   /*width: 100%;*/
@@ -46,3 +56,4 @@
   font-family: var(--font-orbitron);
   
 }
+
