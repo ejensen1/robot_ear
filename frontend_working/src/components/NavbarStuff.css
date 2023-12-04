@@ -48,14 +48,22 @@ left: 0;
   height: 97px;
   object-fit: cover;
 }
-.upload-your-wav,
-.working {
+
+.status {
+  position: absolute;
+  /* padding-right: 60px; */
+  top: 149px;
+  left: 270px;
+  font-weight: 600;
+}
+.upload-your-wav{
   position: absolute;
   padding-right: 20px;
   top: 149px;
   left: 307px;
   font-weight: 600;
 }
+
 .upload-your-wav {
   top: 159px;
   left: 51px;
