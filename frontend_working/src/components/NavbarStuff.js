@@ -37,14 +37,15 @@ class NavbarStuff extends React.Component {
     }
 
     pdfer = (listOfNoteStrings) => {
-      listOfNoteStrings = [
-        '(C0/q, A0, A4, A3)',
-        '(A#1/q, D3, D1, D2)',
-        '(G1/q, C3, A1, G2)',
-        '(F1/q, F3, C1, C2)',
-        '(C1/q, C3, E1, E2)'
-        // Add more note strings as needed
-      ];
+      console.log(listOfNoteStrings)
+      // listOfNoteStrings = [
+      //   '(C0/q, A0, A4, A3)',
+      //   '(A#1/q, D3, D1, D2)',
+      //   '(G1/q, C3, A1, G2)',
+      //   '(F1/q, F3, C1, C2)',
+      //   '(C1/q, C3, E1, E2)'
+      //   // Add more note strings as needed
+      // ];
       //console.log(notes_string)
       const { Factory } = Vex.Flow;
       const vf = new Factory({renderer: { elementId: 'output'} });
