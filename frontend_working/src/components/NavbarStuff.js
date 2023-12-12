@@ -19,11 +19,12 @@ class NavbarStuff extends React.Component {
   }
 
   displayNotes = () => {
-    var change_status = document.getElementsByClassName("status");
-    for (var i = 0; i < change_status.length; i++) {
-      change_status[i].innerHTML = "downloading...";
-    }
+
     if (this.state.showNotes) {
+      var change_status = document.getElementsByClassName("status");
+      for (var i = 0; i < change_status.length; i++) {
+        change_status[i].innerHTML = "downloading...";
+      }
       console.log(this.state.selectedFile.name)
       axios
        .get(`http://localhost:8080/download?name=${this.state.selectedFile.name}`)
@@ -31,6 +32,8 @@ class NavbarStuff extends React.Component {
         console.log(response.data)
         this.pdfer(response.data);
         //var notes_string = response.data
+        this.setState({showNotes: false})
+        this.setState({selectedFile: null})
 
        })
       }
@@ -78,6 +81,9 @@ class NavbarStuff extends React.Component {
     vf.draw();
 
       const element = document.getElementById("output");
+      var printNotes = document.createTextNode(listOfNoteStrings);
+      element.appendChild(printNotes)
+
 
     // Create a configuration object
     const opt = {
@@ -94,6 +100,7 @@ class NavbarStuff extends React.Component {
     for (var i = 0; i < change_status.length; i++) {
       change_status[i].innerHTML = "finished!";
     }
+
 }
 
 // On file select (from the pop up)

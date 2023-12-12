@@ -1,5 +1,7 @@
 #output{
   float: center;
+  font-size: 12px;
+  color: black
 }
 .navbar-shape {
   position: absolute;
