@@ -33,7 +33,7 @@ class NavbarStuff extends React.Component {
         this.pdfer(response.data);
         //var notes_string = response.data
         this.setState({showNotes: false})
-        this.setState({selectedFile: null})
+       // this.setState({selectedFile: null})
 
        })
       }
@@ -100,6 +100,8 @@ class NavbarStuff extends React.Component {
     for (var i = 0; i < change_status.length; i++) {
       change_status[i].innerHTML = "finished!";
     }
+    var hideMusicSheet = document.getElementById("output");
+    hideMusicSheet.parentNode.removeChild(hideMusicSheet);
 
 }
 
